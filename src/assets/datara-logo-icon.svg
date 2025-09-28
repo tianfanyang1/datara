@@ -1,0 +1,19 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- 品牌蓝 -->
+  <defs>
+    <style>
+      .brand { stroke: #4B82A0; fill: #4B82A0; }
+    </style>
+  </defs>
+
+  <!-- 粗描边的 “D” 轮廓（无填充） -->
+  <path d="M64 64 H144 A48 48 0 0 1 144 160 H96" fill="none" stroke="#4B82A0" stroke-width="28" stroke-linecap="round" stroke-linejoin="round"></path>
+
+  <!-- 连接线（向上右） -->
+  <line x1="72" y1="152" x2="126" y2="110" stroke="#4B82A0" stroke-width="16" stroke-linecap="round"></line>
+
+  <!-- 两端圆点 -->
+  <circle cx="72" cy="152" r="16" class="brand"></circle>
+  <circle cx="126" cy="110" r="16" class="brand"></circle>
+</svg>

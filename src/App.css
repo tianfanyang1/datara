@@ -1,0 +1,373 @@
+/* ========== 全局基础 ========== */
+html, body { overflow-x: hidden; }
+
+#root {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #0a0d2c;
+  color: #fff;
+}
+
+/* 仅保留 Vite 模板里 <img class="logo"> 的动画（不影响品牌区） */
+img.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+img.logo:hover { filter: drop-shadow(0 0 2em #646cffaa); }
+img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
+@keyframes logo-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) img.logo { animation: logo-spin infinite 20s linear; }
+}
+
+.card { padding: 2em; }
+.read-the-docs { color: #888; }
+.app { text-align: center; }
+
+/* ========== 顶部导航 ========== */
+.site-header {
+  width: 100%;
+  background: #0a0f2b;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: none;                /* 线改由 .nav-inner::after 绘制 */
+}
+
+.nav-inner {
+  /* 布局 */
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;            /* 贴顶部更“薄” */
+  gap: 16px;
+
+  /* 尺寸 */
+  min-height: 96px;                   /* 不小于 logo 高度，避免裁切 */
+  padding: 4px 16px 0;
+
+  /* 线 + 文案同步位移（负数上移，正数下移） */
+  --nudge: -14px;                     /* ★ 想再高：-16 / -18；想下移：正数 */
+  position: relative;
+  padding-bottom: 0;
+}
+
+/* 分隔线（跟着 --nudge 同步上/下移） */
+.nav-inner::after{
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: calc(0px - var(--nudge));
+  height: 1px;
+  background: rgba(255,255,255,.25);
+}
+
+/* 左侧品牌：图标在上，文字在下 */
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  margin: 0;
+}
+
+/* 固定 logo 尺寸（不随收缩变化） */
+.brand-logo{
+  height: 96px !important;
+  width: auto !important;
+  display: block;
+  margin: 0 0 6px 2px;               /* 与文字左缘微对齐 */
+}
+
+/* DATARA 主标题（文字跟随 --nudge 移动） */
+.brand-main{
+  margin: 0;
+  font-size: 32px;                    /* 需要更小可 28；更大可 36/40 */
+  font-weight: 800;
+  letter-spacing: .02em;
+  line-height: 1.02;
+  color: #fff;
+  transform: translateY(var(--nudge));
+}
+
+/* 副标题（蓝色小字 + 大字距；同样跟随 --nudge 移动） */
+.brand-sub{
+  margin-top: 2px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: #4B82A0;
+  padding-bottom: 0;
+  border-bottom: none;
+  display: inline-block;
+  transform: translateY(var(--nudge));
+}
+
+/* 右侧菜单（同样跟随 --nudge 移动） */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  margin-right: 32px;
+  transform: translateY(var(--nudge));
+}
+.menu a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  line-height: 1;
+  transition: color .22s ease, transform .12s ease;
+}
+.menu a:hover {
+  color: #4da6ff;
+  transform: translateY(-1px);
+}
+
+/* ========== 主体区域 ========== */
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 24px;
+}
+.hero-img { margin-top: 20px; width: 300px; height: auto; }
+
+/* ========== 小屏响应式 ========== */
+@media (max-width: 900px) {
+  .nav-inner { padding: 4px 12px 0; min-height: 92px; --nudge: -10px; }
+  .brand-logo { height: 80px !important; margin: 0 0 4px 2px; }
+  .brand-main { font-size: 28px; }
+  .brand-sub  { font-size: 9px; letter-spacing: .26em; }
+  .menu { gap: 20px; margin-right: 16px; }
+  .menu a { font-size: 15px; }
+  .main { padding: 36px 16px; max-width: 100%; }
+}
+
+/* —— 安全上移：线+左侧文案上移，容器加顶内边距避免顶到最上方 —— */
+.nav-inner{
+  --nudge: -10px;              /* 上移量（负数=上移）。想更高改 -12/-14 */
+  align-items: center;         /* 让整体先居中，再统一上移 */
+  padding: 12px 16px 0;        /* ★ 顶部加 12px 缓冲，避免贴顶 */
+  position: relative;
+}
+
+/* 只移动左侧文字；LOGO 不动 */
+.brand-main,
+.brand-sub{
+  transform: translateY(var(--nudge));
+}
+
+/* 分隔线跟随同量上移 */
+.nav-inner::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: calc(0px - var(--nudge));
+  height: 1px;
+  background: rgba(255,255,255,.25);
+}
+
+/* 菜单不再随 --nudge 上移，保持中线更稳 */
+.menu{
+  transform: none;
+}
+
+/* 只上移左侧品牌整块；菜单与分隔线不动 */
+.brand{
+  transform: translateY(-14px);   /* 上移量：-10/-12/-14 自行调整 */
+}
+
+/* 覆盖之前给文字单独加的上移，避免重复叠加 */
+.brand-main,
+.brand-sub{
+  transform: none !important;
+}
+
+/* 若上移后贴顶太紧，可以给顶部留一点缓冲（可选） */
+.nav-inner{ padding-top: 6px; }     /* 需要就加，大多数情况下可以不动 */
+
+/* 只上移 DATARA 与副标题（logo 不动） */
+.brand{
+  --text-nudge: -10px;                 /* 上移量：-8/-10/-12 自行调 */
+  gap: 2px;                             /* 行距更紧凑（可选） */
+}
+
+.brand-main,
+.brand-sub{
+  transform: translateY(var(--text-nudge)) !important;
+}
+
+.brand-sub{
+  margin-top: 0;                         /* 取消多余上边距，视觉更贴近 */
+  /* 可选：更紧的话再降一点字间距 */
+  /* letter-spacing: .26em; */
+}
+
+/* 只上移右侧菜单（HOME / ABOUT / CONTACT），其它不变 */
+.nav-inner{ --menu-nudge: -8px; }   /* 想更高：-10 / -12；想更低：-4 */
+
+.menu{
+  transform: translateY(var(--menu-nudge)) !important;
+  /* 下面两行是避免字体行高把它又撑下去 */
+  align-self: auto;                 /* 保持随容器对齐 */
+}
+.menu a{
+  line-height: 1;                   /* 避免被行高影响视觉位置 */
+  padding-top: 0;                   /* 若曾加过内边距，清掉 */
+}
+
+/* === 线 + 全部内容(含logo) 同步位移 === */
+.nav-inner{
+  --nudge: -14px;            /* 统一位移：负数=上移，正数=下移 */
+  position: relative;
+  padding-top: 14px;         /* 与上移量同值，防止被顶到最上沿 */
+  padding-bottom: 0;
+}
+
+/* 分隔线跟随同量位移 */
+.nav-inner::after{
+  content: "";
+  position: absolute;
+  left: 0; right: 0;
+  bottom: calc(0px - var(--nudge));   /* 线与内容保持同位移 */
+  height: 1px;
+  background: rgba(255,255,255,.25);
+}
+
+/* 整块左侧(含 logo/标题/副标题) 与 右侧菜单 同步位移 */
+.brand,
+.menu{
+  transform: translateY(var(--nudge)) !important;
+}
+
+/* 清掉之前只移动文字/菜单的设置，避免叠加 */
+.brand-main,
+.brand-sub{
+  transform: none !important;
+}
+
+/* === 顶栏极致紧凑版（logo 保持 96px） === */
+
+/* 允许内容溢出到顶栏外，不裁切 logo */
+.site-header{ overflow: visible; }
+
+/* 统一控制上移量：负数越大，整体越靠上 */
+.nav-inner{
+  --nudge: -18px;          /* 想更小：-20 / -22；想稍大：-14 */
+  min-height: 72px;        /* 实际占用高度（更小可 68/64） */
+  padding: 2px 16px 0;     /* 上下留白尽量小 */
+  position: relative;
+}
+
+/* 分隔线与内容同步上移 */
+.nav-inner::after{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  bottom: calc(0px - var(--nudge));
+  height:1px;
+  background: rgba(255,255,255,.25);
+}
+
+/* 左侧整块（含 logo/标题/副标题）与右侧菜单一起上移 */
+.brand,
+.menu{
+  transform: translateY(var(--nudge)) !important;
+}
+
+/* 保持 logo 尺寸不变 */
+.brand-logo{
+  height:96px !important;
+  width:auto !important;
+  display:block;
+}
+
+/* 文案字号保持你当前设置（可按需再小一点） */
+.brand-main{ font-size:32px; line-height:1.02; margin:0; }
+.brand-sub { font-size:10px; letter-spacing:.28em; margin-top:2px; }
+.menu{ gap:32px; margin-right:32px; }
+.menu a{ font-size:16px; line-height:1; }
+
+/* —— 顶栏再小一档（logo 保持 96px） —— */
+.site-header{ overflow: visible; }
+
+.nav-inner{
+  --nudge: -24px;        /* 再上移一档：-20~-28 都可 */
+  min-height: 64px;      /* 之前 72 → 64（想更薄可 60） */
+  padding: 0 14px 0;     /* 去掉上下多余内边距 */
+  position: relative;
+}
+
+/* 线随位移同步 */
+.nav-inner::after{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  bottom: calc(0px - var(--nudge));
+  height:1px;
+  background: rgba(255,255,255,.25);
+}
+
+/* 左侧整块(含 logo/文字) 与 右侧菜单 同步上移 */
+.brand, .menu{ transform: translateY(var(--nudge)) !important; }
+
+/* 细节：更紧凑一些的间距与菜单 */
+.brand{ gap: 0; }
+.menu{ gap: 24px; margin-right: 24px; }
+
+/* 兜底：logo 尺寸固定不变 */
+.brand-logo{ height:96px !important; width:auto !important; display:block; }
+
+/* —— 顶栏再压薄一档（logo=96 不变） —— */
+.site-header{ overflow: visible; }
+
+.nav-inner{
+  --nudge: -30px;        /* 统一上移量：-28/-30/-32 都可 */
+  min-height: 56px;      /* 之前 64 → 56；想更薄可 52 */
+  padding: 0 12px 0;     /* 去上下内边距 */
+  position: relative;
+}
+
+/* 分隔线与位移同步 */
+.nav-inner::after{
+  content:"";
+  position:absolute;
+  left:0; right:0;
+  bottom: calc(0px - var(--nudge));
+  height:1px;
+  background: rgba(255,255,255,.25);
+}
+
+/* 左侧整块(含 logo/文字) + 右侧菜单 同步上移 */
+.brand,
+.menu{
+  transform: translateY(var(--nudge)) !important;
+}
+
+/* 细节更紧凑 */
+.brand{ gap: 0; }
+.brand-main{ font-size: 30px; line-height: 1.02; margin: 0; }
+.brand-sub { font-size: 10px; letter-spacing: .26em; margin-top: 0; }
+.menu{ gap: 22px; margin-right: 18px; }
+.menu a{ font-size: 16px; line-height: 1; }
+
+/* 固定 logo 尺寸（不随压薄变化） */
+.brand-logo{ height: 96px !important; width: auto !important; display: block; }
+
+/* —— 可选安全缓冲（如觉得太贴顶） —— */
+/* .nav-inner{ padding-top: 2px; } */
