@@ -1,4 +1,3 @@
-/* ========== 全局基础 ========== */
 html, body { overflow-x: hidden; }
 
 #root {
@@ -16,7 +15,6 @@ body {
   color: #fff;
 }
 
-/* 仅保留 Vite 模板里 <img class="logo"> 的动画（不影响品牌区） */
 img.logo {
   height: 6em;
   padding: 1.5em;
@@ -34,36 +32,32 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
 .read-the-docs { color: #888; }
 .app { text-align: center; }
 
-/* ========== 顶部导航 ========== */
 .site-header {
   width: 100%;
   background: #0a0f2b;
   position: sticky;
   top: 0;
   z-index: 1000;
-  border-bottom: none;                /* 线改由 .nav-inner::after 绘制 */
+  border-bottom: none;              
 }
 
 .nav-inner {
-  /* 布局 */
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;            /* 贴顶部更“薄” */
+  align-items: flex-start;        
   gap: 16px;
 
-  /* 尺寸 */
-  min-height: 96px;                   /* 不小于 logo 高度，避免裁切 */
+  min-height: 96px;                
   padding: 4px 16px 0;
 
-  /* 线 + 文案同步位移（负数上移，正数下移） */
-  --nudge: -14px;                     /* ★ 想再高：-16 / -18；想下移：正数 */
+ 
+  --nudge: -14px;                 
   position: relative;
   padding-bottom: 0;
 }
 
-/* 分隔线（跟着 --nudge 同步上/下移） */
 .nav-inner::after{
   content: "";
   position: absolute;
@@ -74,7 +68,6 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
   background: rgba(255,255,255,.25);
 }
 
-/* 左侧品牌：图标在上，文字在下 */
 .brand {
   display: flex;
   flex-direction: column;
@@ -83,18 +76,16 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
   margin: 0;
 }
 
-/* 固定 logo 尺寸（不随收缩变化） */
 .brand-logo{
   height: 96px !important;
   width: auto !important;
   display: block;
-  margin: 0 0 6px 2px;               /* 与文字左缘微对齐 */
+  margin: 0 0 6px 2px;            
 }
 
-/* DATARA 主标题（文字跟随 --nudge 移动） */
 .brand-main{
   margin: 0;
-  font-size: 32px;                    /* 需要更小可 28；更大可 36/40 */
+  font-size: 32px;                   
   font-weight: 800;
   letter-spacing: .02em;
   line-height: 1.02;
@@ -102,7 +93,6 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
   transform: translateY(var(--nudge));
 }
 
-/* 副标题（蓝色小字 + 大字距；同样跟随 --nudge 移动） */
 .brand-sub{
   margin-top: 2px;
   font-size: 10px;
@@ -116,7 +106,6 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
   transform: translateY(var(--nudge));
 }
 
-/* 右侧菜单（同样跟随 --nudge 移动） */
 .menu {
   display: flex;
   align-items: center;
@@ -139,7 +128,6 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
   transform: translateY(-1px);
 }
 
-/* ========== 主体区域 ========== */
 .main {
   max-width: 1200px;
   margin: 0 auto;
@@ -147,7 +135,6 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
 }
 .hero-img { margin-top: 20px; width: 300px; height: auto; }
 
-/* ========== 小屏响应式 ========== */
 @media (max-width: 900px) {
   .nav-inner { padding: 4px 12px 0; min-height: 92px; --nudge: -10px; }
   .brand-logo { height: 80px !important; margin: 0 0 4px 2px; }
@@ -158,21 +145,18 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
   .main { padding: 36px 16px; max-width: 100%; }
 }
 
-/* —— 安全上移：线+左侧文案上移，容器加顶内边距避免顶到最上方 —— */
 .nav-inner{
-  --nudge: -10px;              /* 上移量（负数=上移）。想更高改 -12/-14 */
-  align-items: center;         /* 让整体先居中，再统一上移 */
-  padding: 12px 16px 0;        /* ★ 顶部加 12px 缓冲，避免贴顶 */
+  --nudge: -10px;             
+  align-items: center;         
+  padding: 12px 16px 0;       
   position: relative;
 }
 
-/* 只移动左侧文字；LOGO 不动 */
 .brand-main,
 .brand-sub{
   transform: translateY(var(--nudge));
 }
 
-/* 分隔线跟随同量上移 */
 .nav-inner::after{
   content: "";
   position: absolute;
@@ -182,29 +166,23 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
   background: rgba(255,255,255,.25);
 }
 
-/* 菜单不再随 --nudge 上移，保持中线更稳 */
 .menu{
   transform: none;
 }
 
-/* 只上移左侧品牌整块；菜单与分隔线不动 */
 .brand{
-  transform: translateY(-14px);   /* 上移量：-10/-12/-14 自行调整 */
+  transform: translateY(-14px);  
 }
 
-/* 覆盖之前给文字单独加的上移，避免重复叠加 */
 .brand-main,
 .brand-sub{
   transform: none !important;
 }
 
-/* 若上移后贴顶太紧，可以给顶部留一点缓冲（可选） */
-.nav-inner{ padding-top: 6px; }     /* 需要就加，大多数情况下可以不动 */
-
-/* 只上移 DATARA 与副标题（logo 不动） */
+.nav-inner{ padding-top: 6px; }     
 .brand{
-  --text-nudge: -10px;                 /* 上移量：-8/-10/-12 自行调 */
-  gap: 2px;                             /* 行距更紧凑（可选） */
+  --text-nudge: -10px;                 
+  gap: 2px;                          
 }
 
 .brand-main,
@@ -213,68 +191,59 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
 }
 
 .brand-sub{
-  margin-top: 0;                         /* 取消多余上边距，视觉更贴近 */
-  /* 可选：更紧的话再降一点字间距 */
-  /* letter-spacing: .26em; */
+  margin-top: 0;                         
 }
 
-/* 只上移右侧菜单（HOME / ABOUT / CONTACT），其它不变 */
-.nav-inner{ --menu-nudge: -8px; }   /* 想更高：-10 / -12；想更低：-4 */
+.nav-inner{ --menu-nudge: -8px; }  
 
 .menu{
   transform: translateY(var(--menu-nudge)) !important;
-  /* 下面两行是避免字体行高把它又撑下去 */
-  align-self: auto;                 /* 保持随容器对齐 */
+
+  align-self: auto;                
 }
 .menu a{
-  line-height: 1;                   /* 避免被行高影响视觉位置 */
-  padding-top: 0;                   /* 若曾加过内边距，清掉 */
+  line-height: 1;                   
+  padding-top: 0;                   
 }
 
-/* === 线 + 全部内容(含logo) 同步位移 === */
+
 .nav-inner{
-  --nudge: -14px;            /* 统一位移：负数=上移，正数=下移 */
+  --nudge: -14px;           
   position: relative;
-  padding-top: 14px;         /* 与上移量同值，防止被顶到最上沿 */
+  padding-top: 14px;         
   padding-bottom: 0;
 }
 
-/* 分隔线跟随同量位移 */
 .nav-inner::after{
   content: "";
   position: absolute;
   left: 0; right: 0;
-  bottom: calc(0px - var(--nudge));   /* 线与内容保持同位移 */
+  bottom: calc(0px - var(--nudge));   
   height: 1px;
   background: rgba(255,255,255,.25);
 }
 
-/* 整块左侧(含 logo/标题/副标题) 与 右侧菜单 同步位移 */
 .brand,
 .menu{
   transform: translateY(var(--nudge)) !important;
 }
 
-/* 清掉之前只移动文字/菜单的设置，避免叠加 */
+
 .brand-main,
 .brand-sub{
   transform: none !important;
 }
 
-/* === 顶栏极致紧凑版（logo 保持 96px） === */
-
-/* 允许内容溢出到顶栏外，不裁切 logo */
 .site-header{ overflow: visible; }
 
-/* 统一控制上移量：负数越大，整体越靠上 */
+
 .nav-inner{
-  --nudge: -18px;          /* 想更小：-20 / -22；想稍大：-14 */
-  min-height: 72px;        /* 实际占用高度（更小可 68/64） */
-  padding: 2px 16px 0;     /* 上下留白尽量小 */
+  --nudge: -18px;         
+  min-height: 72px;       
+  padding: 2px 16px 0;    
   position: relative;
 }
 
-/* 分隔线与内容同步上移 */
 .nav-inner::after{
   content:"";
   position:absolute;
@@ -284,36 +253,36 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
   background: rgba(255,255,255,.25);
 }
 
-/* 左侧整块（含 logo/标题/副标题）与右侧菜单一起上移 */
+
 .brand,
 .menu{
   transform: translateY(var(--nudge)) !important;
 }
 
-/* 保持 logo 尺寸不变 */
+
 .brand-logo{
   height:96px !important;
   width:auto !important;
   display:block;
 }
 
-/* 文案字号保持你当前设置（可按需再小一点） */
+
 .brand-main{ font-size:32px; line-height:1.02; margin:0; }
 .brand-sub { font-size:10px; letter-spacing:.28em; margin-top:2px; }
 .menu{ gap:32px; margin-right:32px; }
 .menu a{ font-size:16px; line-height:1; }
 
-/* —— 顶栏再小一档（logo 保持 96px） —— */
+
 .site-header{ overflow: visible; }
 
 .nav-inner{
-  --nudge: -24px;        /* 再上移一档：-20~-28 都可 */
-  min-height: 64px;      /* 之前 72 → 64（想更薄可 60） */
-  padding: 0 14px 0;     /* 去掉上下多余内边距 */
+  --nudge: -24px;       
+  min-height: 64px;     
+  padding: 0 14px 0;     
   position: relative;
 }
 
-/* 线随位移同步 */
+
 .nav-inner::after{
   content:"";
   position:absolute;
@@ -323,27 +292,27 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
   background: rgba(255,255,255,.25);
 }
 
-/* 左侧整块(含 logo/文字) 与 右侧菜单 同步上移 */
+
 .brand, .menu{ transform: translateY(var(--nudge)) !important; }
 
-/* 细节：更紧凑一些的间距与菜单 */
+
 .brand{ gap: 0; }
 .menu{ gap: 24px; margin-right: 24px; }
 
-/* 兜底：logo 尺寸固定不变 */
+
 .brand-logo{ height:96px !important; width:auto !important; display:block; }
 
-/* —— 顶栏再压薄一档（logo=96 不变） —— */
+
 .site-header{ overflow: visible; }
 
 .nav-inner{
-  --nudge: -30px;        /* 统一上移量：-28/-30/-32 都可 */
-  min-height: 56px;      /* 之前 64 → 56；想更薄可 52 */
-  padding: 0 12px 0;     /* 去上下内边距 */
+  --nudge: -30px;        
+  min-height: 56px;      
+  padding: 0 12px 0;    
   position: relative;
 }
 
-/* 分隔线与位移同步 */
+
 .nav-inner::after{
   content:"";
   position:absolute;
@@ -353,21 +322,245 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
   background: rgba(255,255,255,.25);
 }
 
-/* 左侧整块(含 logo/文字) + 右侧菜单 同步上移 */
 .brand,
 .menu{
   transform: translateY(var(--nudge)) !important;
 }
 
-/* 细节更紧凑 */
+
 .brand{ gap: 0; }
 .brand-main{ font-size: 30px; line-height: 1.02; margin: 0; }
 .brand-sub { font-size: 10px; letter-spacing: .26em; margin-top: 0; }
 .menu{ gap: 22px; margin-right: 18px; }
 .menu a{ font-size: 16px; line-height: 1; }
 
-/* 固定 logo 尺寸（不随压薄变化） */
+
 .brand-logo{ height: 96px !important; width: auto !important; display: block; }
 
-/* —— 可选安全缓冲（如觉得太贴顶） —— */
-/* .nav-inner{ padding-top: 2px; } */
+:root { --header-gap: 24px; }
+
+.site-header{
+  position: sticky;
+  top: var(--header-gap);    
+  margin-top: var(--header-gap); 
+  
+  z-index: 1000;
+  background: #0a0f2b;
+  border-bottom: 1px solid rgba(255,255,255,.18);
+}
+
+.site-header {
+  border-bottom: 1px solid rgba(255,255,255,.18);
+}
+
+/* 关闭 nav-inner 自带的伪元素分隔线（如果存在） */
+.nav-inner::after {
+  content: none !important;
+  display: none !important;
+  height: 0 !important;
+  border: 0 !important;
+}
+
+/* —— 布局容器 —— */
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.eyebrow{
+  color: #7fa5bb;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.hero-min{
+  padding: 48px 0 8px;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.hero-min-inner{
+  display: grid;
+  grid-template-columns: 1.2fr .8fr;
+  align-items: center;
+  gap: 24px;
+}
+.hero-min-copy h1{
+  margin: 0 0 12px;
+  font-size: 36px;
+  line-height: 1.15;
+  letter-spacing: .01em;
+}
+.hero-min-copy p{
+  margin: 0;
+  color: #cfd6e4;
+}
+.hero-min-logo{
+  width: 140px;
+  height: auto;
+  opacity: .85;
+  justify-self: end;
+}
+
+.section-what{
+  padding: 48px 0 72px;
+}
+.section-title{
+  margin: 6px 0 8px;
+  font-size: 28px;
+  line-height: 1.2;
+}
+.section-sub{
+  margin: 0 0 28px;
+  color: #b9c4d9;
+}
+
+.cards-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.card{
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  padding: 22px 20px;
+  text-align: left;
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
+}
+.card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  border-color: rgba(77,166,255,.35);
+}
+.card-icon{
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  display: grid; place-items: center;
+  background: rgba(77,166,255,.15);
+  border: 1px solid rgba(77,166,255,.35);
+  font-size: 20px;
+  margin-bottom: 12px;
+}
+.card h3{
+  margin: 0 0 6px;
+  font-size: 18px;
+  letter-spacing: .02em;
+}
+.card p{
+  margin: 0;
+  color: #c9d2e3;
+  line-height: 1.55;
+}
+
+@media (max-width: 1024px){
+  .hero-min-inner{ grid-template-columns: 1fr; }
+  .hero-min-logo{ justify-self: start; width: 120px; }
+  .cards-grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px){
+  .hero-min-copy h1{ font-size: 28px; }
+  .cards-grid{ grid-template-columns: 1fr; }
+}
+
+.services-title {
+  font-size: 44px;        
+  font-weight: 900;
+  letter-spacing: .01em;
+  margin: 8px 0 28px;
+}
+
+@media (min-width: 1200px) {
+  .services-title { font-size: 52px; }
+}
+
+@media (max-width: 640px) {
+  .services-title { font-size: 28px; margin-bottom: 16px; }
+}
+
+.services .services-eyebrow {
+  font-size: 20px !important;    
+  letter-spacing: .30em;       
+  color: #86a9c2;                 
+  text-transform: uppercase;
+  margin: 0 0 10px 0;
+  text-align: center;
+}
+
+.services .services-headline {
+  font-size: 56px !important;      
+  font-weight: 900;
+  line-height: 1.12;
+  letter-spacing: .01em;
+  margin: 0 0 16px 0;
+  text-align: center;
+}
+
+.services .services-subtitle {
+  font-size: 20px;               
+  line-height: 1.6;
+  color: #b8c7db;
+  max-width: 1100px;
+  margin: 0 auto 28px;            
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .services .services-eyebrow { font-size: 14px !important; letter-spacing: .28em; }
+  .services .services-headline { font-size: 32px !important; }
+  .services .services-subtitle { font-size: 14px; }
+}
+
+.section-what {
+  padding: 56px 0 24px;
+  text-align: center;
+}
+
+.section-what .eyebrow {
+  font-size: 22px;          
+  letter-spacing: .30em;
+  text-transform: uppercase;
+  color: #86a9c2;
+  margin: 0 0 12px;
+}
+
+.section-what .section-title {
+  font-size: 60px;         
+  line-height: 1.12;
+  font-weight: 900;
+  letter-spacing: .01em;
+  margin: 0 0 16px;
+  color: #fff;
+}
+
+/* 副文案 */
+.section-what .section-sub {
+  font-size: 20px;
+  line-height: 1.6;
+  color: #b8c7db;
+  max-width: 1100px;
+  margin: 0 auto 28px;
+}
+
+/* 小屏适配 */
+@media (max-width: 640px) {
+  .section-what .eyebrow      { font-size: 14px; letter-spacing: .28em; }
+  .section-what .section-title{ font-size: 32px; }
+  .section-what .section-sub  { font-size: 14px; }
+}
+
+.site-footer {
+  background: #c2d6ff;
+  color: #0a0d2c;
+  padding: 28px 16px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+}
+.site-footer .footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
