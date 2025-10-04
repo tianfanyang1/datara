@@ -66,3 +66,19 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+/* 确保整个站是深底浅字 */
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #0a0d2c;   /* 深蓝底 */
+  color: #ffffff;        /* 白字 */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* 可选：看得见布局边界，调试完删掉 */
+.debug * { outline: 1px dashed rgba(255,255,255,.2); }
+

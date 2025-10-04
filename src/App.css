@@ -564,3 +564,230 @@ img.logo.react:hover { filter: drop-shadow(0 0 2em #61dafbaa); }
   letter-spacing: 0.02em;
 }
 
+
+.menu a.active {
+  border-bottom: 2px solid #4da6ff;
+  padding-bottom: 4px;
+}
+
+
+:root {
+  /* 顶栏和浏览器顶部留一点气口：调这里就能整体下移 */
+  --header-top-gap: 8px; /* 想再靠下点就 12 / 16px */
+}
+
+/* 顶栏：粘顶 + 下移 + 背景 + 细线 */
+.site-header {
+  position: static;
+  top: var(--header-top-gap);      /* 关键：整体下移 */
+  z-index: 1000;
+  background: #0a0f2b;
+  border-bottom: 1px solid rgba(255, 255, 255, .25);
+}
+
+/* 顶栏内部布局 */
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 12px 24px;              /* 高度适中 */
+  display: flex;
+  align-items: center;             /* 垂直居中 */
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* 左侧品牌：logo + 文字 */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.brand-logo {
+  display: block;
+  height: 48px;                    /* 想更大就 56/64 */
+  width: auto;
+  flex: 0 0 auto;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.brand-main {
+  color: #fff;
+  font-weight: 800;
+  font-size: 28px;                 /* 你可以在 24~32 之间微调 */
+  line-height: 1;
+  letter-spacing: .02em;
+}
+
+.brand-sub {
+  margin-top: 4px;
+  color: #7aa2bf;
+  font-size: 12px;
+  letter-spacing: .30em;
+}
+
+/* 右侧菜单 */
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+}
+
+.menu a {
+  color: #cfd6ff;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .06em;
+  padding-bottom: 6px;            /* 给下划线留位置 */
+  transition: color .2s ease;
+}
+
+.menu a:hover { color: #4da6ff; }
+
+/* 当前激活页：蓝色下划线 */
+.menu a.active {
+  border-bottom: 3px solid #4da6ff;
+}
+
+/* —— 品牌区：改为纵向堆叠，并让左边缘对齐 —— */
+.brand{
+  display: flex;
+  flex-direction: column;   /* 纵向：上=logo，下=文字 */
+  align-items: flex-start;  /* 左对齐 */
+  gap: 8px;                 /* logo 与文字的间距 */
+  margin: 0;                /* 避免外边距把它推偏 */
+}
+
+/* logo 与 “DATARA” 左边缘对齐 */
+.brand-logo{
+  display: block;
+  height: 64px;             /* 想更小可 56/48 */
+  width: auto;
+  margin: 0;                /* 去掉任何左/右/自动外边距 */
+  align-self: flex-start;   /* 保险：保证贴左 */
+}
+
+/* 文字区保持左对齐，压紧行距更稳 */
+.brand-text{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.brand-main{
+  margin: 0;
+  line-height: 1.05;
+}
+
+.brand-sub{
+  margin-top: 4px;
+  letter-spacing: .30em;
+}
+
+/* === Compact Header (shrink) === */
+.site-header { 
+  /* 保持 sticky/非 sticky 原逻辑不变，这里只做尺寸收紧 */
+}
+
+.nav-inner{
+  /* 上下 padding 收紧，整体高度变矮 */
+  padding: 10px 20px;
+  min-height: 72px;     /* 原本如果 84~96，这里压到 72 */
+  gap: 12px;
+}
+
+/* 左侧：图标 + 文字 */
+.brand-logo{
+  height: 56px;         /* 原来 72~96 → 56，更紧凑 */
+  width: auto;
+  margin: 0 0 4px 2px;  /* 略微靠左，与文字更对齐 */
+}
+
+.brand-main{
+  font-size: 36px;      /* 原来 44~60 → 36 */
+  line-height: 1.04;
+  margin: 0;
+  letter-spacing: .02em;
+}
+
+.brand-sub{
+  margin-top: 2px;
+  font-size: 11px;      /* 原来 12~14 → 11 */
+  letter-spacing: .26em;/* 略收紧 */
+  padding-bottom: 0;
+}
+
+/* 右侧菜单更紧凑 */
+.menu{
+  gap: 36px;            /* 原来 48~72 → 36 */
+  margin-right: 24px;   /* 右侧留白收一点 */
+}
+.menu a{
+  font-size: 16px;      /* 原 18~22 → 16 */
+  line-height: 1;
+}
+
+/* 分隔线细一点（如果你有 nav-inner::after 的那条线） */
+.nav-inner::after{
+  height: 1px;
+  opacity: .35;         /* 更轻一点 */
+}
+
+/* 让布局把页脚推到底部 */
+html, body, #root { height: 100%; }
+.app-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.page-content { flex: 1 0 auto; }
+
+/* ====== 你页面的主色，确保不是黑底 ====== */
+body {
+  background-color: #0a0d2c;  /* 你的深蓝色 */
+  color: #fff;
+}
+
+/* ====== What We Do 的卡片栅格（恢复栅格） ====== */
+.cards-grid{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 32px;
+}
+.card{
+  background: #0e132f;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 16px;
+  padding: 24px;
+}
+.card h3{ margin: 8px 0 10px; font-size: 20px; }
+.card p { color: #bcc7de; line-height: 1.6; }
+.card-icon{ font-size: 24px; opacity: .9; }
+
+/* 响应式栅格 */
+@media (max-width: 1024px){ .cards-grid{ grid-template-columns: repeat(2,1fr); } }
+@media (max-width: 640px){  .cards-grid{ grid-template-columns: 1fr; } }
+
+/* ====== 页脚（浅蓝色横条） ====== */
+.site-footer {
+  background: #c6d9ff;            /* 浅蓝 */
+  border-top: 1px solid rgba(0,0,0,.06);
+}
+.site-footer .footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 22px 16px;
+  text-align: center;
+  font-size: 18px;
+  color: #0a0d2c;                  /* 深色文字 */
+  letter-spacing: .01em;
+}
+@media (max-width: 900px) {
+  .site-footer .footer-inner { font-size: 16px; padding: 18px 12px; }
+}
