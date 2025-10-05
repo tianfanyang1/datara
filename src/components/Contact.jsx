@@ -13,7 +13,6 @@ export default function Contact() {
           padding: 32px 16px;
         }
 
-        /* 标题 + 引言 */
         [data-contact-clean] .title {
           font-weight: 800;
           font-size: clamp(32px, 3.6vw, 48px);
@@ -24,12 +23,22 @@ export default function Contact() {
           font-size: clamp(16px, 1.25vw, 18px);
           line-height: 1.7;
           color: rgba(255,255,255,.88);
-          margin: 0 0 22px;
+          margin: 0 0 10px;
         }
+        /* email line under intro */
+        [data-contact-clean] .alt-contact {
+          margin: 4px 0 24px;
+          font-size: 15px;
+          color: rgba(255,255,255,.9);
+        }
+        [data-contact-clean] .alt-contact a {
+          color: #7aa2ff;
+          text-decoration: underline;
+        }
+        [data-contact-clean] .alt-contact a:hover { opacity: .9; }
 
-        /* 表单卡片 */
         [data-contact-clean] .card {
-          background: #cfe0ff;                /* 浅蓝卡片，深色背景上对比好 */
+          background: #cfe0ff;
           color: #0a0f2b;
           border-radius: 16px;
           padding: 22px;
@@ -102,10 +111,19 @@ export default function Contact() {
       `}</style>
 
       <div className="wrap">
-        <h1 className="title">Get in touch</h1>
+        <h1 className="title">Contact Us</h1>
         <p className="intro">
           Tell us briefly about your project, timeline, and goals. We’ll get back
           to you within one business day with next steps.
+        </p>
+        <p className="alt-contact">
+          Prefer email? you can email to us {" "}
+          <a
+            href="mailto:info@dataratech.com"
+            aria-label="Email us at info at dataratech dot com"
+          >
+            info@dataratech.com
+          </a>
         </p>
 
         <form
@@ -133,16 +151,9 @@ export default function Contact() {
 
           <div className="grid2" style={{ marginTop: 14 }}>
             <label>
-              Company*
-              <input name="company" type="text" placeholder="Acme Inc." required />
-            </label>
-            <label>
               Website (optional)
               <input name="site" type="url" placeholder="https://example.com" />
             </label>
-          </div>
-
-          <div className="grid2" style={{ marginTop: 14 }}>
             <label>
               Project Type*
               <select name="type" defaultValue="" required>
@@ -150,12 +161,15 @@ export default function Contact() {
                   Select one…
                 </option>
                 <option>Web App</option>
-                <option>E-commerce</option>
-                <option>Performance</option>
-                <option>DevOps</option>
+                <option>Design Personal Website</option>
                 <option>Consulting</option>
+                <option>E-commerce</option>
+                <option>Platform, API & Database</option>
               </select>
             </label>
+          </div>
+
+          <div className="grid2" style={{ marginTop: 14 }}>
             <label>
               Message*
               <textarea
@@ -165,6 +179,7 @@ export default function Contact() {
                 required
               />
             </label>
+            <span aria-hidden="true" />
           </div>
 
           <div className="actions">

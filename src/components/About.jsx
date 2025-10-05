@@ -83,23 +83,6 @@ export default function About() {
           </article>
         </div>
 
-        <p className="eyebrow" style={{ marginTop: 36 }}>Proof</p>
-        <div className="cards-grid">
-          <article className="card">
-            <h3>By the numbers</h3>
-            <p>40+ projects delivered · Avg. launch cycle 10 days · Lighthouse 93+ · SLA ≥ 99.9%</p>
-          </article>
-          <article className="card">
-            <h3>What clients say</h3>
-            <p>“Datara reduced our release cycle from three weeks to four days—Core Web Vitals all green.”</p>
-            <p style={{ opacity: 0.8 }}>— Head of Product, SaaS</p>
-          </article>
-          <article className="card">
-            <h3>Industries</h3>
-            <p>SaaS · E-commerce · FinTech · Education · Media</p>
-          </article>
-        </div>
-
         {/* Values */}
         <p className="eyebrow" style={{ marginTop: 36 }}>What we value</p>
         <div className="cards-grid">
