@@ -1,113 +1,69 @@
 import React from "react";
+import { useForm, ValidationError } from "@formspree/react";
 
 export default function Contact() {
+  const [state, handleSubmit] = useForm("xovklkoz"); // 你的 Formspree 表单 ID
+
   return (
     <section data-contact-clean>
       <style>{`
         [data-contact-clean], [data-contact-clean] * { box-sizing: border-box; }
         [data-contact-clean] { text-align: left !important; }
+        .wrap { max-width: 900px; margin: 0 auto; padding: 32px 16px; }
 
-        [data-contact-clean] .wrap {
-          max-width: 900px;
-          margin: 0 auto;
-          padding: 32px 16px;
-        }
+        .title { font-weight: 800; font-size: clamp(32px, 3.6vw, 48px); letter-spacing: .01em; margin: 8px 0 10px; }
+        .intro { font-size: clamp(16px, 1.25vw, 18px); line-height: 1.7; color: rgba(255,255,255,.88); margin: 0 0 10px; }
+        .alt-contact { margin: 4px 0 24px; font-size: 15px; color: rgba(255,255,255,.9); }
+        .alt-contact a { color: #7aa2ff; text-decoration: underline; }
+        .alt-contact a:hover { opacity: .9; }
 
-        [data-contact-clean] .title {
-          font-weight: 800;
-          font-size: clamp(32px, 3.6vw, 48px);
-          letter-spacing: .01em;
-          margin: 8px 0 10px;
-        }
-        [data-contact-clean] .intro {
-          font-size: clamp(16px, 1.25vw, 18px);
-          line-height: 1.7;
-          color: rgba(255,255,255,.88);
-          margin: 0 0 10px;
-        }
-        /* email line under intro */
-        [data-contact-clean] .alt-contact {
-          margin: 4px 0 24px;
-          font-size: 15px;
-          color: rgba(255,255,255,.9);
-        }
-        [data-contact-clean] .alt-contact a {
-          color: #7aa2ff;
-          text-decoration: underline;
-        }
-        [data-contact-clean] .alt-contact a:hover { opacity: .9; }
+        .card { background: #cfe0ff; color: #0a0f2b; border-radius: 16px; padding: 22px; box-shadow: 0 10px 28px rgba(0,0,0,.18); color-scheme: light; }
 
-        [data-contact-clean] .card {
-          background: #cfe0ff;
-          color: #0a0f2b;
-          border-radius: 16px;
-          padding: 22px;
-          box-shadow: 0 10px 28px rgba(0,0,0,.18);
-          color-scheme: light;
+        .contact-grid{
+          display:grid; gap:14px; grid-template-columns: 1fr 1fr;
+          grid-template-areas:
+            "name   email"
+            "website project"
+            "message message"
+            "actions actions";
+        }
+        .fld.name{ grid-area: name; }
+        .fld.email{ grid-area: email; }
+        .fld.website{ grid-area: website; }
+        .fld.project{ grid-area: project; }
+        .fld.message{ grid-area: message; }
+        .actions{ grid-area: actions; display:flex; justify-content:flex-end; gap:10px; margin-top: 4px; }
+
+        @media (max-width: 720px){
+          .contact-grid{
+            grid-template-columns: 1fr;
+            grid-template-areas: "name" "email" "website" "project" "message" "actions";
+          }
         }
 
-        [data-contact-clean] .grid2 {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 14px;
+        label { display: grid; gap: 8px; font-weight: 600; }
+        input, select, textarea {
+          appearance: none; -webkit-appearance: none; background: #fff !important; color: #0a0f2b !important;
+          border: 1px solid rgba(10,15,43,.28) !important; border-radius: 12px !important; padding: 12px 14px !important;
+          font: 16px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif !important; width: 100% !important; box-shadow: none !important;
         }
-        @media (max-width: 720px) {
-          [data-contact-clean] .grid2 { grid-template-columns: 1fr; }
-        }
+        input::placeholder, textarea::placeholder { color: rgba(10,15,43,.45); }
+        input:focus, select:focus, textarea:focus { outline: 2px solid #5aa0ff; border-color: #5aa0ff !important; }
+        input:-webkit-autofill, input:-webkit-autofill:focus{ -webkit-text-fill-color: #0a0f2b !important; -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important; }
 
-        [data-contact-clean] label {
-          display: grid;
-          gap: 8px;
-          font-weight: 600;
-        }
+        .btn { background:#0a0f2b; color:#fff; border: none; border-radius: 12px; padding: 12px 16px; font-weight: 700; cursor: pointer; transition: transform .15s ease, opacity .15s ease; }
+        .btn:hover { opacity:.92; transform: translateY(-1px); }
 
-        [data-contact-clean] input,
-        [data-contact-clean] select,
-        [data-contact-clean] textarea {
-          appearance: none;
-          -webkit-appearance: none;
-          background: #fff !important;
-          color: #0a0f2b !important;
-          border: 1px solid rgba(10,15,43,.28) !important;
-          border-radius: 12px !important;
-          padding: 12px 14px !important;
-          font: 16px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif !important;
-          width: 100% !important;
-          box-shadow: none !important;
-        }
-        [data-contact-clean] input::placeholder,
-        [data-contact-clean] textarea::placeholder {
-          color: rgba(10,15,43,.45);
-        }
-        [data-contact-clean] input:focus,
-        [data-contact-clean] select:focus,
-        [data-contact-clean] textarea:focus {
-          outline: 2px solid #5aa0ff;
-          border-color: #5aa0ff !important;
-        }
-        [data-contact-clean] input:-webkit-autofill,
-        [data-contact-clean] input:-webkit-autofill:focus{
-          -webkit-text-fill-color: #0a0f2b !important;
-          -webkit-box-shadow: 0 0 0 1000px #ffffff inset !important;
-        }
-
-        [data-contact-clean] .actions {
-          margin-top: 14px;
-          display: flex;
-          gap: 10px;
-          justify-content: flex-end;
-        }
-        [data-contact-clean] .btn {
-          background:#0a0f2b;
-          color:#fff;
-          border: none;
-          border-radius: 12px;
-          padding: 12px 16px;
+        /* 成功提示样式（更深的文字颜色） */
+        .success {
+          background: #bfd2ff;
+          border: 1px solid #7aa2ff;
+          color: #0a0f2b;          /* 深色字体 */
+          border-radius: 14px;
+          padding: 18px 20px;
           font-weight: 700;
-          cursor: pointer;
-          transition: transform .15s ease, opacity .15s ease;
+          font-size: 18px;
         }
-        [data-contact-clean] .btn:hover { opacity:.92; transform: translateY(-1px); }
       `}</style>
 
       <div className="wrap">
@@ -117,60 +73,46 @@ export default function Contact() {
           to you within one business day with next steps.
         </p>
         <p className="alt-contact">
-          Prefer email? you can email to us {" "}
-          <a
-            href="mailto:info@dataratech.com"
-            aria-label="Email us at info at dataratech dot com"
-          >
-            info@dataratech.com
-          </a>
+          Prefer email? <a href="mailto:info@dataratech.com">info@dataratech.com</a>
         </p>
 
-        <form
-          className="card"
-          onSubmit={(e) => {
-            e.preventDefault();
-            alert("Thanks! We received your message.");
-          }}
-        >
-          <div className="grid2">
-            <label>
+        {/* 成功后只显示提示，不显示摘要 */}
+        {state.succeeded ? (
+          <div className="success">
+            Thanks! Your message was sent. We’ll reach out soon.
+          </div>
+        ) : (
+          <form className="card contact-grid" onSubmit={handleSubmit}>
+            <label className="fld name">
               Full Name*
               <input name="name" type="text" placeholder="Jane Doe" required />
             </label>
-            <label>
-              Work Email*
-              <input
-                name="email"
-                type="email"
-                placeholder="jane@company.com"
-                required
-              />
-            </label>
-          </div>
 
-          <div className="grid2" style={{ marginTop: 14 }}>
-            <label>
+            <label className="fld email">
+              Work Email*
+              <input name="email" type="email" placeholder="jane@company.com" required />
+              <ValidationError prefix="Email" field="email" errors={state.errors} />
+            </label>
+
+            <label className="fld website">
               Website (optional)
               <input name="site" type="url" placeholder="https://example.com" />
             </label>
-            <label>
+
+            <label className="fld project">
               Project Type*
               <select name="type" defaultValue="" required>
-                <option value="" disabled>
-                  Select one…
-                </option>
+                <option value="" disabled>Select one…</option>
                 <option>Web App</option>
-                <option>Design Personal Website</option>
-                <option>Consulting</option>
-                <option>E-commerce</option>
+                <option>Marketing/Business Website</option>
                 <option>Platform, API & Database</option>
+                <option>E-commerce</option>
+                <option>Consulting / Code Review</option>
               </select>
+              <ValidationError prefix="Project Type" field="type" errors={state.errors} />
             </label>
-          </div>
 
-          <div className="grid2" style={{ marginTop: 14 }}>
-            <label>
+            <label className="fld message">
               Message*
               <textarea
                 name="message"
@@ -178,14 +120,27 @@ export default function Contact() {
                 placeholder="What are you trying to build? Any timeline or constraints?"
                 required
               />
+              <ValidationError prefix="Message" field="message" errors={state.errors} />
             </label>
-            <span aria-hidden="true" />
-          </div>
 
-          <div className="actions">
-            <button className="btn" type="submit">Send Message</button>
-          </div>
-        </form>
+            {/* 邮件主题（可改） */}
+            <input type="hidden" name="_subject" value="New Contact from dataratech.com" />
+            {/* 防机器人 */}
+            <label style={{ display: "none" }}>
+              Leave this empty
+              <input name="_gotcha" type="text" />
+            </label>
+
+            <div className="actions">
+              <button className="btn" type="submit" disabled={state.submitting}>
+                {state.submitting ? "Sending…" : "Send Message"}
+              </button>
+            </div>
+
+            {/* 全局错误 */}
+            <ValidationError errors={state.errors} />
+          </form>
+        )}
       </div>
     </section>
   );
