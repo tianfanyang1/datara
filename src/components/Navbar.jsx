@@ -1,15 +1,13 @@
 import { NavLink } from "react-router-dom";
-import Logo from "../assets/datara-logo-icon.svg"; 
 
 export default function Navbar() {
   return (
     <header className="site-header">
       <div className="nav-inner">
         <div className="brand">
-          <img src={Logo} alt="Datara logo" className="brand-logo" />
           <div className="brand-text">
             <div className="brand-main">DATARA</div>
-            <div className="brand-sub">YOUR SOFTWARE RESOURCE</div>
+            <div className="brand-sub">YOUR SOFTWARE RESOURCE CHOICE</div>
           </div>
         </div>
 

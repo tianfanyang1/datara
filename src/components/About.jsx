@@ -2,7 +2,6 @@ export default function About() {
   return (
     <section className="section-what">
       <div className="container">
-        <p className="eyebrow">About Datara</p>
         <h1 className="section-title">Software development that ships — reliably.</h1>
         <p className="section-sub">
           DATARA is a US-based software development studio focused on{" "}
@@ -15,7 +14,7 @@ export default function About() {
         <div className="cards-grid" style={{ marginTop: 12 }}>
           <article className="card">
             <h3>Custom Web Apps</h3>
-            <p>React / Node / REST / GraphQL — from MVP to production with tests, observability, and maintainable code.</p>
+            <p>We design and build custom web applications using Django, Spring Boot, and React. From API design and database modeling to authentication and deployment</p>
           </article>
           <article className="card">
             <h3>APIs & Integrations</h3>
@@ -82,6 +81,7 @@ export default function About() {
             <p>Dependency hygiene, secrets management, least-privilege access, and auditing baked into the process.</p>
           </article>
         </div>
+
 
         {/* Values */}
         <p className="eyebrow" style={{ marginTop: 36 }}>What we value</p>

@@ -1,77 +1,94 @@
-import HeroLogo from "../assets/datara-logo-icon.svg";
+// Home.jsx
+import React from "react";
+import { Link } from "react-router-dom";
+
 const SERVICES = [
   {
-    icon: "⚛️",
     title: "Web Apps",
-    text:
-      "React / Node / REST — pixel-perfect, responsive, and fast. From MVPs to production systems.",
+    blurb:
+      "We design and ship modern web apps in weeks. React/Node architecture, secure auth, clean APIs, and dashboards that scale.",
+    q: "web-app",
   },
   {
-    icon: "🧩",
-    title: "WordPress",
-    text:
-      "Themes, performance tuning, content workflows—publish faster with confidence.",
-  },
-  {
-    icon: "🛒",
-    title: "E-commerce",
-    text:
-      "Product pages that convert, snappy carts, and stable checkouts that keep revenue flowing.",
-  },
-  {
-    icon: "🚀",
     title: "Performance",
-    text:
-      "Lighthouse, Core Web Vitals, caching/CDN strategies—measurable speed improvements.",
+    blurb:
+      "Improve Core Web Vitals with image/CDN budgets and code-splitting. Faster loads you can measure in production.",
+    q: "performance",
   },
   {
-    icon: "🔧",
+    title: "Personal Website & Business Websites ",
+    blurb:
+      "We can design personal website or your business website for you",
+    q: "Personal Website",
+  },
+  {
     title: "DevOps",
-    text:
-      "CI/CD, Docker, cloud infra—ship safely and automatically with solid pipelines.",
+    blurb:
+      "CI/CD, Docker, staging, and observability. Safer, repeatable deploys with shorter MTTR.",
+    q: "devops",
   },
   {
-    icon: "🤝",
+  title: "Data & APIs",
+  blurb:
+    "Plan and build REST/GraphQL APIs, integrations, and data workflows. Clear contracts, versioning, and docs.",
+  q: "data-apis",
+},
+  {
     title: "Consulting",
-    text:
-      "Roadmapping, code reviews, architecture choices—make decisions with clarity.",
+    blurb:
+      "Roadmaps, code reviews, and architecture choices with trade-offs made explicit—so you can move with clarity.",
+    q: "consulting",
   },
 ];
 
 export default function Home() {
   return (
     <main className="main">
+      {/* HERO */}
       <section className="hero-min">
         <div className="container hero-min-inner">
           <div className="hero-min-copy">
-            <h1>Helping you build the website you’ve always wanted.</h1>
+            <h1>Build. Ship. Improve.</h1>
             <p>
-              From idea to launch — fast, reliable, and maintainable. Datara
-              builds modern web solutions that scale with your business.
+              We build the software you need—on time and measured against
+              outcomes that matter. Weekly demos, production-ready delivery, and
+              continuous tuning for speed, stability, and conversion.
             </p>
-          </div>
 
-          <img src={HeroLogo} alt="Datara mark" className="hero-min-logo" />
+            <ul className="hero-points">
+              <li>Short sprints with weekly demos—no big reveals.</li>
+              <li>Performance you can feel: faster loads, fewer errors.</li>
+              <li>Clean handoff: docs, tests, and production-ready code.</li>
+            </ul>
+          </div>
         </div>
       </section>
 
+      {/* SERVICES */}
       <section id="whatwedo" className="section-what">
         <div className="container">
-          <p className="eyebrow">What We Do</p>
-          <h2 className="section-title">Practical services that ship.</h2>
-          <p className="section-sub">
-            We focus on the essentials—clear goals, solid engineering, and clean
-            delivery. Here's how we can help you move faster.
-          </p>
+          <h2 className="section-title">Our Services</h2>
 
           <div className="cards-grid">
             {SERVICES.map((s) => (
               <article className="card" key={s.title}>
-                <div className="card-icon" aria-hidden="true">
-                  {s.icon}
-                </div>
+                {/* 只有定义了 icon 才渲染，默认不显示 */}
+                {s.icon && (
+                  <div className="card-icon" aria-hidden="true">
+                    {s.icon}
+                  </div>
+                )}
+
                 <h3>{s.title}</h3>
-                <p>{s.text}</p>
+                <p className="card-blurb">{s.blurb}</p>
+
+                <Link
+                  className="card-cta"
+                  to={`/contact?type=${encodeURIComponent(s.q ?? s.title)}`}
+                  aria-label={`Contact about ${s.title}`}
+                >
+                  Learn more →
+                </Link>
               </article>
             ))}
           </div>

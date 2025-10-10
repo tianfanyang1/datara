@@ -2,7 +2,7 @@ import React from "react";
 import { useForm, ValidationError } from "@formspree/react";
 
 export default function Contact() {
-  const [state, handleSubmit] = useForm("xovklkoz"); // 你的 Formspree 表单 ID
+  const [state, handleSubmit] = useForm("xovklkoz"); 
 
   return (
     <section data-contact-clean>
@@ -76,7 +76,6 @@ export default function Contact() {
           Prefer email? <a href="mailto:info@dataratech.com">info@dataratech.com</a>
         </p>
 
-        {/* 成功后只显示提示，不显示摘要 */}
         {state.succeeded ? (
           <div className="success">
             Thanks! Your message was sent. We’ll reach out soon.
@@ -85,17 +84,17 @@ export default function Contact() {
           <form className="card contact-grid" onSubmit={handleSubmit}>
             <label className="fld name">
               Full Name*
-              <input name="name" type="text" placeholder="Jane Doe" required />
+              <input name="name" type="text" placeholder="Your Name" required />
             </label>
 
             <label className="fld email">
-              Work Email*
-              <input name="email" type="email" placeholder="jane@company.com" required />
+              Your Email*
+              <input name="email" type="email" placeholder="example@mail.com" required />
               <ValidationError prefix="Email" field="email" errors={state.errors} />
             </label>
 
             <label className="fld website">
-              Website (optional)
+              Link Website (optional)
               <input name="site" type="url" placeholder="https://example.com" />
             </label>
 
@@ -108,6 +107,7 @@ export default function Contact() {
                 <option>Platform, API & Database</option>
                 <option>E-commerce</option>
                 <option>Consulting / Code Review</option>
+                <option>Other</option>
               </select>
               <ValidationError prefix="Project Type" field="type" errors={state.errors} />
             </label>
@@ -122,10 +122,7 @@ export default function Contact() {
               />
               <ValidationError prefix="Message" field="message" errors={state.errors} />
             </label>
-
-            {/* 邮件主题（可改） */}
             <input type="hidden" name="_subject" value="New Contact from dataratech.com" />
-            {/* 防机器人 */}
             <label style={{ display: "none" }}>
               Leave this empty
               <input name="_gotcha" type="text" />
@@ -137,7 +134,6 @@ export default function Contact() {
               </button>
             </div>
 
-            {/* 全局错误 */}
             <ValidationError errors={state.errors} />
           </form>
         )}
