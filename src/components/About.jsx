@@ -11,33 +11,6 @@ export default function About() {
           and easy to evolve.
         </p>
 
-        <div className="cards-grid" style={{ marginTop: 12 }}>
-          <article className="card">
-            <h3>Custom Web Apps</h3>
-            <p>We design and build custom web applications using Django, Spring Boot, and React. From API design and database modeling to authentication and deployment</p>
-          </article>
-          <article className="card">
-            <h3>APIs & Integrations</h3>
-            <p>High-availability APIs, partner integrations, and data sync with clear SLAs and rollback strategies.</p>
-          </article>
-          <article className="card">
-            <h3>Cloud & DevOps</h3>
-            <p>CI/CD pipelines, containerization, blue/green & canary rollouts, cost optimization, and security baselines.</p>
-          </article>
-          <article className="card">
-            <h3>Performance</h3>
-            <p>Core Web Vitals, caching/CDN strategies, DB & queue tuning—metrics-driven, measurable speed gains.</p>
-          </article>
-          <article className="card">
-            <h3>CMS & Content</h3>
-            <p>WordPress/Headless workflows that balance editorial speed with frontend performance.</p>
-          </article>
-          <article className="card">
-            <h3>Consulting</h3>
-            <p>Roadmaps, architecture choices, code reviews, and refactoring plans—make confident decisions.</p>
-          </article>
-        </div>
-
         <p className="eyebrow" style={{ marginTop: 36 }}>Who we help</p>
         <div className="cards-grid">
           <article className="card">
